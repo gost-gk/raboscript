@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import random
 import argparse
-from typing import Sequence
+from typing import Sequence, Iterator, List
 
 
 END_PUNCT = '.!?…'
@@ -16,7 +16,7 @@ def skip_punct(words: Sequence[str], start_index: int) -> int:
     return index
 
 
-def to_sentences(words: Sequence[str]) -> Sequence[str]:
+def to_sentences(words: Sequence[str]) -> Iterator[Sequence[str]]:
     i = 0
     while i < len(words):
         sent = []
@@ -31,11 +31,7 @@ def sent_effective_len(sent: Sequence[str]) -> int:
     return sum((1 for word in sent if word.isalnum()))
 
 
-def append_proper_spaces(word: str) -> str:
-    return word
-
-
-def raboficate(sents: Sequence[Sequence[str]]) -> Sequence[str]:
+def raboficate(sents: Sequence[List[str]]) -> Sequence[str]:
     RABOWORDS = (
         ('много', '.'),
         ('малость', '.'),
